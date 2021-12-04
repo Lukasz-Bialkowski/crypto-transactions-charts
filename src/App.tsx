@@ -12,6 +12,4 @@ const App = () => (
   </Layout>
 );
 
-export {
-  App
-}
+export default App;
