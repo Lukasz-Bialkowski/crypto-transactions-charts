@@ -11,9 +11,13 @@ const CurrencyBalanceRow = ({ balance, rates }: CurrencyBalanceRowProps) => {
   } = balance || {};
   const totalBalance = completedDeposits - completedWithdrawals;
   const totalBalanceEurEquiv =
-    rates && currency && rates[currency] && totalBalance !== 0
-      ? formatNumbers(rates[currency]! * totalBalance)
-      : "-";
+    rates && currency && rates[currency] && totalBalance !== 0 ? (
+      <td className="align-right">
+        {formatNumbers(rates[currency]! * totalBalance)}
+      </td>
+    ) : (
+      <td>-</td>
+    );
 
   return (
     <tr>
@@ -23,7 +27,7 @@ const CurrencyBalanceRow = ({ balance, rates }: CurrencyBalanceRowProps) => {
       <td>{pendingWithdrawals}</td>
       <td>{pendingDeposits}</td>
       <td>{totalBalance}</td>
-      <td>{totalBalanceEurEquiv}</td>
+      {totalBalanceEurEquiv}
     </tr>
   );
 };

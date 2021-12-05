@@ -9,12 +9,14 @@ const TransactionRow = ({
   <tr>
     <td>{formatDate(timestamp)}</td>
     <td>{currency}</td>
-    <td>{amount}</td>
-    <td>
-      {currency && rates && rates[currency]
-        ? formatNumbers(rates[currency]! * amount)
-        : "-"}
-    </td>
+    <td className="align-right">{formatNumbers(amount)}</td>
+    {currency && rates && rates[currency] ? (
+      <td className="align-right">
+        {formatNumbers(rates[currency]! * amount)}
+      </td>
+    ) : (
+      <td>-</td>
+    )}
     <td>{type}</td>
     <td>{status}</td>
   </tr>
