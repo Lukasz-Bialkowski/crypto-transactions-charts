@@ -1,8 +1,9 @@
 import { ReactNode } from "react";
 
+import { AsyncStatus } from "../../types/AsyncStatus";
+
 export type TableProps = {
-  loading: boolean;
-  error?: boolean;
+  status: AsyncStatus;
   items: ReactNode[];
   header: ReactNode | ReactNode[];
 };

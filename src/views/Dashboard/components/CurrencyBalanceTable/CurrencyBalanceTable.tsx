@@ -1,5 +1,4 @@
 import { useMemo } from "react";
-import { shallowEqual } from "react-redux";
 
 import { Table } from "../../../../components/Table";
 import { useTypedSelector } from "../../../../hooks/useTypedSelector";
@@ -11,14 +10,11 @@ import { Transaction } from "../../../../types/Transaction";
 import { CurrencyBalanceRow } from "../CurrencyBalanceRow";
 
 const CurrencyBalanceTable = () => {
-  const [transactions, transactionsLoading] = useTypedSelector(
-    ({ transactions: { transactions, loading } }) => [transactions, loading],
-    shallowEqual
+  const transactions = useTypedSelector(
+    ({ transactions: { transactions } }) => transactions
   );
-  const [rates, ratesLoading] = useTypedSelector(
-    ({ rates: { rates, loading } }) => [rates, loading],
-    shallowEqual
-  );
+  const status = useTypedSelector(({ transactions: { status } }) => status);
+  const rates = useTypedSelector(({ rates: { rates } }) => rates);
 
   const currenciesBalance = useMemo(() => {
     return transactions.reduce((acc, transaction: Transaction) => {
@@ -36,23 +32,23 @@ const CurrencyBalanceTable = () => {
         [transaction.currency]: {
           currency: transaction.currency,
           completedWithdrawals:
-            transaction.type === TransactionType.WITHDRAWAL &&
-            transaction.status === TransactionStatus.COMPLETED
+            transaction.type === TransactionType.Withdrawal &&
+            transaction.status === TransactionStatus.Completed
               ? currentCompletedWithdrawals + 1
               : currentCompletedWithdrawals,
           completedDeposits:
-            transaction.type === TransactionType.DEPOSIT &&
-            transaction.status === TransactionStatus.COMPLETED
+            transaction.type === TransactionType.Deposit &&
+            transaction.status === TransactionStatus.Completed
               ? currentCompletedDeposits + 1
               : currentCompletedDeposits,
           pendingWithdrawals:
-            transaction.type === TransactionType.WITHDRAWAL &&
-            transaction.status === TransactionStatus.PENDING
+            transaction.type === TransactionType.Withdrawal &&
+            transaction.status === TransactionStatus.Pending
               ? currentPendingWithdrawals + 1
               : currentPendingWithdrawals,
           pendingDeposits:
-            transaction.type === TransactionType.DEPOSIT &&
-            transaction.status === TransactionStatus.PENDING
+            transaction.type === TransactionType.Deposit &&
+            transaction.status === TransactionStatus.Pending
               ? currentPendingDeposits + 1
               : currentPendingDeposits,
         },
@@ -64,7 +60,7 @@ const CurrencyBalanceTable = () => {
     <section>
       <h2>Currency balance</h2>
       <Table
-        loading={ratesLoading || transactionsLoading}
+        status={status}
         items={Object.values(currenciesBalance).map((balance) => (
           <CurrencyBalanceRow
             key={balance.currency}

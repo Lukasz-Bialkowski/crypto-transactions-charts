@@ -1,4 +1,5 @@
 import { Currency } from "../enums/Currency";
+import { AsyncStatus } from "../AsyncStatus";
 
 export const RATES_SLICE_NAME = "rates";
 
@@ -8,6 +9,5 @@ export type RatesByCurrency = {
 
 export type RatesState = {
   rates: RatesByCurrency;
-  loading: boolean;
-  error: boolean;
+  status: AsyncStatus;
 };

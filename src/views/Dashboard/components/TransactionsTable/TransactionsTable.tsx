@@ -1,30 +1,38 @@
-import { shallowEqual } from "react-redux";
-
 import { Table } from "../../../../components/Table";
 import { useTypedSelector } from "../../../../hooks/useTypedSelector";
 import { TransactionRow } from "../TransactionRow";
 
 const TransactionsTable = () => {
-  const [transactions, transactionsLoading, transactionsError] =
-    useTypedSelector(
-      ({ transactions: { transactions, loading, error } }) => [
-        transactions,
-        loading,
-        error,
-      ],
-      shallowEqual
-    );
-  const [rates, ratesLoading] = useTypedSelector(
-    ({ rates: { rates, loading } }) => [rates, loading],
-    shallowEqual
+  const transactions = useTypedSelector(
+    ({ transactions: { transactions } }) => transactions
   );
+  const transactionsStatus = useTypedSelector(
+    ({ transactions: { status } }) => status
+  );
+  const rates = useTypedSelector(({ rates: { rates } }) => rates);
+  const ratesStatus = useTypedSelector(({ rates: { status } }) => status);
+
+  const resolveTableStatus = () => {
+    if (
+      [ratesStatus, transactionsStatus].some((status) => status === "loading")
+    ) {
+      return "loading";
+    } else if (
+      [ratesStatus, transactionsStatus].every((status) => status === "success")
+    ) {
+      return "success";
+    } else if (transactionsStatus === "failed") {
+      return "failed";
+    } else {
+      return "idle";
+    }
+  };
 
   return (
     <section>
       <h2>Transactions</h2>
       <Table
-        error={transactionsError}
-        loading={ratesLoading || transactionsLoading}
+        status={resolveTableStatus()}
         items={transactions.map((transaction) => (
           <TransactionRow
             key={transaction.id}

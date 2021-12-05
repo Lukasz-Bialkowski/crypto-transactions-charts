@@ -7,8 +7,7 @@ import { RatesState, RATES_SLICE_NAME } from "../../types/slices/RatesState";
 
 const initialState: RatesState = {
   rates: {},
-  loading: false,
-  error: false,
+  status: "idle",
 };
 
 const fetchRates = createAsyncThunk("fetchRates", async () => {
@@ -23,15 +22,13 @@ export const ratesSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder.addCase(fetchRates.pending, (state) => {
-      state.loading = true;
+      state.status = 'loading'
     });
     builder.addCase(fetchRates.rejected, (state) => {
-      state.loading = false;
-      state.error = true;
+      state.status = 'failed'
     });
     builder.addCase(fetchRates.fulfilled, (state, { payload }) => {
-      state.loading = false;
-      state.error = false;
+      state.status = 'success'
       state.rates = { ...state.rates, ...payload };
     });
   },

@@ -1,5 +1,5 @@
-import { formatDate } from "../../../../utils/dates.util";
-import { formatNumbers } from "../../../../utils/numbers.util";
+import { formatDate } from "../../../../utils/datesUtil";
+import { formatNumbers } from "../../../../utils/numbersUtil";
 import { TransactionRowProps } from "./TransactionRowProps";
 
 const TransactionRow = ({

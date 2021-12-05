@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 
-import { fetchRates } from "../../store/rates/rates.slice";
-import { fetchTransactions } from "../../store/transactions/transactions.slice";
+import { fetchRates } from "../../store/rates/ratesSlice";
+import { fetchTransactions } from "../../store/transactions/transactionsSlice";
 import { useTypedDispatch } from "../../hooks/useTypedDispatch";
 import { CurrencyRatesTable } from "./components/CurrencyRatesTable";
 import { TransactionsTable } from "./components/TransactionsTable";

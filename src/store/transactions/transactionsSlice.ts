@@ -10,8 +10,7 @@ import { TransactionListResponse } from "../../types/TransactionListResponse";
 
 const initialState: TransactionsState = {
   transactions: [],
-  loading: false,
-  error: false,
+  status: "idle",
 };
 
 const fetchTransactions = createAsyncThunk("fetchTransactions", async () => {
@@ -26,15 +25,13 @@ export const transactionsSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder.addCase(fetchTransactions.pending, (state) => {
-      state.loading = true;
+      state.status = "loading";
     });
     builder.addCase(fetchTransactions.rejected, (state) => {
-      state.loading = false;
-      state.error = true;
+      state.status = "failed";
     });
     builder.addCase(fetchTransactions.fulfilled, (state, { payload }) => {
-      state.loading = false;
-      state.error = false;
+      state.status = "success";
       state.transactions = payload.transactions;
     });
   },

@@ -1,4 +1,4 @@
-import { formatNumbers } from "../../../../utils/numbers.util";
+import { formatNumbers } from "../../../../utils/numbersUtil";
 import { CurrencyBalanceRowProps } from "./CurrencyBalanceRowProps";
 
 const CurrencyBalanceRow = ({ balance, rates }: CurrencyBalanceRowProps) => {
