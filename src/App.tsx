@@ -1,13 +1,14 @@
 import { Navigate, Route, Routes } from "react-router-dom";
+
 import { Layout } from "./components/Layout";
-import { TRANSACTIONS_ROUTE } from "./constants/routes";
-import { Transactions } from "./containers/Transactions";
+import { DASHBOARD_ROUTE } from "./constants/routes";
+import { Dashboard } from "./views/Dashboard";
 
 const App = () => (
   <Layout>
     <Routes>
-      <Route path={TRANSACTIONS_ROUTE} element={<Transactions />} />
-      <Route path="*" element={<Navigate to={TRANSACTIONS_ROUTE} />} />
+      <Route path={DASHBOARD_ROUTE} element={<Dashboard />} />
+      <Route path="*" element={<Navigate to={DASHBOARD_ROUTE} />} />
     </Routes>
   </Layout>
 );

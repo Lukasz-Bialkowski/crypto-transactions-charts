@@ -1,6 +1,7 @@
-import { configureStore } from '@reduxjs/toolkit'
-import { ratesReducer } from './features/rates/ratesSlice';
-import { transactionsReducer } from './features/transactions/transactionsSlice';
+import { configureStore } from "@reduxjs/toolkit";
+
+import { ratesReducer } from "./store/rates/rates.slice";
+import { transactionsReducer } from "./store/transactions/transactions.slice";
 
 export const store = configureStore({
   reducer: {

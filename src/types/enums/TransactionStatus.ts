@@ -1,3 +1,4 @@
 export enum TransactionStatus {
-  COMPLETED = 'completed', PENDING = 'pending'
+  COMPLETED = "completed",
+  PENDING = "pending",
 }

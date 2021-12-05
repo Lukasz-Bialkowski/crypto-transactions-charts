@@ -1,7 +1,7 @@
-import { Currency } from "../../../../types/enums/Currency";
+import { RatesByCurrency } from "../../../../types/slices/RatesState";
 import { Transaction } from "../../../../types/Transaction";
 
 export type TransactionRowProps = {
   transaction: Transaction;
-  rates: Record<Currency, number | null>
-}
+  rates: RatesByCurrency;
+};

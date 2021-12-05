@@ -1,3 +1,5 @@
 export enum Currency {
-  BTC = 'BTC', USD = 'USD', CHF = 'CHF'
+  BTC = "BTC",
+  USD = "USD",
+  CHF = "CHF",
 }

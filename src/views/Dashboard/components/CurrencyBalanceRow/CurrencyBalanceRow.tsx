@@ -1,10 +1,7 @@
-import { formatNumbers } from "../../../../utils/NumberUtils";
+import { formatNumbers } from "../../../../utils/numbers.util";
 import { CurrencyBalanceRowProps } from "./CurrencyBalanceRowProps";
 
-const CurrencyBalanceRow = ({
-  balance,
-  rates,
-}: CurrencyBalanceRowProps) => {
+const CurrencyBalanceRow = ({ balance, rates }: CurrencyBalanceRowProps) => {
   const {
     currency,
     completedWithdrawals = 0,
@@ -13,7 +10,10 @@ const CurrencyBalanceRow = ({
     pendingDeposits = 0,
   } = balance || {};
   const totalBalance = completedDeposits - completedWithdrawals;
-  const totalBalanceEurEquiv = (rates && currency && rates[currency] && totalBalance !== 0) ? formatNumbers(rates[currency]! * totalBalance) : '-';
+  const totalBalanceEurEquiv =
+    rates && currency && rates[currency] && totalBalance !== 0
+      ? formatNumbers(rates[currency]! * totalBalance)
+      : "-";
 
   return (
     <tr>
@@ -28,6 +28,4 @@ const CurrencyBalanceRow = ({
   );
 };
 
-export {
-  CurrencyBalanceRow
-};
+export { CurrencyBalanceRow };
